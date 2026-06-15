@@ -15,6 +15,13 @@
         <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
     </style>
 
+    <!-- Splash screen theme — full screen, no action bar, dark status bar -->
+    <style name="Theme.BudgetMate.Splash" parent="Theme.BudgetMate">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/navy_primary</item>
+        <item name="android:statusBarColor" tools:targetApi="21">@color/navy_primary</item>
+    </style>
+
     <!-- Consistent card style used across all screens -->
     <style name="CardStyle" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/surface_white</item>
