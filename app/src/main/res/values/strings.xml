@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BudgetMate</string>
+    <string name="tagline">your money, your rules</string>
+
+    <!-- Auth -->
+    <string name="login">Log In</string>
+    <string name="register">Register</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="display_name">Display Name (optional)</string>
+
+    <!-- Errors -->
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_credentials">Incorrect username or password</string>
+    <string name="error_username_taken">Username already taken</string>
+    <string name="error_password_short">Password must be at least 6 characters</string>
+    <string name="error_invalid_amount">Enter a valid amount greater than zero</string>
+    <string name="error_end_time">End time must be after start time</string>
+    <string name="error_select_category">Please select a category</string>
+    <string name="error_select_date">Please select a date</string>
+    <string name="error_min_exceeds_max">Minimum goal cannot exceed maximum budget</string>
+
+    <!-- Dashboard -->
+    <string name="greeting">Hi, %1$s 👋</string>
+    <string name="this_month">THIS MONTH\'S SPENDING</string>
+    <string name="monthly_total">Total Spent</string>
+    <string name="goal_on_track">✅ On track — keep it up!</string>
+    <string name="goal_warning">⚠️ Approaching your limit</string>
+    <string name="goal_exceeded">🚨 Budget exceeded!</string>
+    <string name="goal_under_min">📉 Spending below minimum goal</string>
+    <string name="goal_range">Goal: %1$s – %2$s</string>
+    <string name="set_goals_prompt">Tap Settings to set your budget goals</string>
+
+    <!-- Transactions -->
+    <string name="add_transaction">Add Transaction</string>
+    <string name="amount">Amount (ZAR)</string>
+    <string name="category">Category</string>
+    <string name="date">Date</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="description">Description (optional)</string>
+    <string name="add_photo">Add Photo Receipt</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_from_gallery">Choose from Gallery</string>
+    <string name="expense">Expense</string>
+    <string name="income">Income</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="no_transactions">No transactions for this period</string>
+
+    <!-- Categories -->
+    <string name="categories">Categories</string>
+    <string name="add_category">Add Category</string>
+    <string name="category_name">Category Name</string>
+    <string name="icon">Icon</string>
+    <string name="colour">Colour</string>
+    <string name="monthly_cap">Monthly Budget Cap (optional)</string>
+    <string name="cannot_delete_default">Default categories cannot be deleted</string>
+    <string name="has_transactions">This category has transactions. Reassign them first.</string>
+
+    <!-- Reports -->
+    <string name="reports">Reports</string>
+    <string name="select_date_range">Select Date Range</string>
+    <string name="total_spent">Total Spent: %1$s</string>
+    <string name="no_data_for_period">No data for selected period</string>
+    <string name="no_transactions_period">No transactions found for this period</string>
+
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="monthly_goals">Monthly Budget Goals</string>
+    <string name="min_goal">Minimum Monthly Spending (ZAR)</string>
+    <string name="max_budget">Maximum Monthly Budget (ZAR)</string>
+    <string name="save_goals">Save Goals</string>
+    <string name="logout">Log Out</string>
+    <string name="logout_confirm">Are you sure you want to log out?</string>
+    <string name="cancel">Cancel</string>
+    <string name="goals_saved">Goals saved ✅</string>
+
+    <!-- Gamification -->
+    <string name="gamification">Rewards</string>
+    <string name="your_level">Your Level</string>
+    <string name="badges_earned">Badges Earned</string>
+    <string name="streak">Streak</string>
+    <string name="xp_to_next">XP to next level</string>
+
+    <!-- Navigation -->
+    <string name="nav_dashboard">Home</string>
+    <string name="nav_categories">Categories</string>
+    <string name="nav_reports">Reports</string>
+    <string name="nav_rewards">Rewards</string>
+    <string name="nav_settings">Settings</string>
+
+    <plurals name="streak_days">
+        <item quantity="one">%d day streak 🔥</item>
+        <item quantity="other">%d day streak 🔥</item>
+    </plurals>
+</resources>

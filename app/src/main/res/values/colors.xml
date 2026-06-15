@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand palette -->
+    <color name="teal_primary">#00C9A7</color>
+    <color name="navy_primary">#1B2A4A</color>
+    <color name="navy_dark">#101E35</color>
+
+    <!-- Backgrounds -->
+    <color name="background">#F0F4F8</color>
+    <color name="surface_white">#FFFFFF</color>
+
+    <!-- Text -->
+    <color name="text_primary">#1B2A4A</color>
+    <color name="text_secondary">#6B7C93</color>
+
+    <!-- Status colours -->
+    <color name="success_green">#2DC653</color>
+    <color name="warning_amber">#FFB703</color>
+    <color name="error_red">#E63946</color>
+
+    <!-- Legacy / system -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

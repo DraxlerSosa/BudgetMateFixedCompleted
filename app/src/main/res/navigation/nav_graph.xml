@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.budgetmate.app.ui.dashboard.DashboardFragment"
+        android:label="@string/nav_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_addTransaction"
+            app:destination="@id/addTransactionFragment"/>
+    </fragment>
+
+    <dialog
+        android:id="@+id/addTransactionFragment"
+        android:name="com.budgetmate.app.ui.transactions.AddTransactionFragment"
+        android:label="@string/add_transaction"
+        tools:layout="@layout/fragment_add_transaction"/>
+
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.budgetmate.app.ui.categories.CategoriesFragment"
+        android:label="@string/nav_categories"
+        tools:layout="@layout/fragment_categories"/>
+
+    <fragment
+        android:id="@+id/reportsFragment"
+        android:name="com.budgetmate.app.ui.reports.ReportsFragment"
+        android:label="@string/nav_reports"
+        tools:layout="@layout/fragment_reports">
+        <action
+            android:id="@+id/action_reports_to_photoViewer"
+            app:destination="@id/photoViewerFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/gamificationFragment"
+        android:name="com.budgetmate.app.ui.gamification.GamificationFragment"
+        android:label="@string/nav_rewards"
+        tools:layout="@layout/fragment_gamification"/>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.budgetmate.app.ui.settings.SettingsFragment"
+        android:label="@string/nav_settings"
+        tools:layout="@layout/fragment_settings"/>
+
+    <fragment
+        android:id="@+id/photoViewerFragment"
+        android:name="com.budgetmate.app.ui.transactions.PhotoViewerFragment"
+        android:label="Photo"
+        tools:layout="@layout/fragment_photo_viewer">
+        <argument
+            android:name="photoUri"
+            app:argType="string"/>
+    </fragment>
+
+</navigation>
