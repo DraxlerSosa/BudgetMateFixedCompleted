@@ -18,6 +18,9 @@
     <color name="warning_amber">#FFB703</color>
     <color name="error_red">#E63946</color>
 
+    <!-- UI elements -->
+    <color name="divider">#E0EAF0</color>
+
     <!-- Legacy / system -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
