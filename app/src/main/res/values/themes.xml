@@ -11,11 +11,16 @@
         <item name="android:colorBackground">@color/background</item>
         <item name="colorSurface">@color/surface_white</item>
         <item name="colorOnSurface">@color/text_primary</item>
+        <!-- Force all EditText text to be dark so it shows on white backgrounds -->
+        <item name="android:editTextColor">@color/text_primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_secondary</item>
         <item name="android:statusBarColor" tools:targetApi="21">@color/navy_dark</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
     </style>
 
-    <!-- Splash screen theme — full screen, no action bar, dark status bar -->
+    <!-- Splash screen theme -->
     <style name="Theme.BudgetMate.Splash" parent="Theme.BudgetMate">
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@color/navy_primary</item>
