@@ -18,6 +18,10 @@
     <color name="warning_amber">#FFB703</color>
     <color name="error_red">#E63946</color>
 
+    <!-- Transaction type colours -->
+    <color name="expense_red">#E63946</color>
+    <color name="income_green">#2DC653</color>
+
     <!-- UI elements -->
     <color name="divider">#E0EAF0</color>
 
