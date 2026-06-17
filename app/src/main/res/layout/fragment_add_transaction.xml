@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/surface_white">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +44,6 @@
                 android:text="@string/income"/>
         </com.google.android.material.button.MaterialButtonToggleGroup>
 
-        <!-- Amount -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilAmount"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -56,10 +54,10 @@
                 android:id="@+id/etAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
                 android:inputType="numberDecimal"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Category -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +72,6 @@
             android:background="@drawable/bg_spinner"
             android:layout_marginTop="4dp"/>
 
-        <!-- Date -->
         <Button
             android:id="@+id/btnDate"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -84,7 +81,6 @@
             android:text="@string/date"
             android:drawableStart="@drawable/ic_calendar"/>
 
-        <!-- Times -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,7 +104,6 @@
                 android:layout_marginStart="4dp"/>
         </LinearLayout>
 
-        <!-- Description -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilDescription"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -120,11 +115,11 @@
                 android:id="@+id/etDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
                 android:inputType="textMultiLine"
                 android:maxLines="3"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Photo -->
         <Button
             android:id="@+id/btnAddPhoto"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
