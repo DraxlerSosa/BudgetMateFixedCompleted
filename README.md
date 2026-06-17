@@ -41,7 +41,7 @@ The app was designed with real South African users in mind: amounts are displaye
 - Personalised greeting using the user's display name.
 - Monthly spending total displayed in ZAR.
 - Visual goal indicator (progress bar) showing how the month's spending compares to the user's minimum and maximum budget goals.
-- Status label changes dynamically: ✅ On track → ⚠️ Approaching limit → 🚨 Budget exceeded.
+- Status label changes dynamically: ✅ On track → ⚠️ Approaching limit → 🚨 Budget exceeded → 📉 Below minimum.
 - XP progress bar and streak counter visible at a glance.
 
 ### ➕ Add Transaction (Bottom Sheet)
@@ -109,28 +109,54 @@ The **Rewards** screen shows:
 > The two custom features below were designed and implemented in addition to all module requirements. Please look out for these when reviewing the app.
 
 ### Feature 1: Income vs Expense Toggle
-When adding a transaction, users can switch between **Expense** and **Income** using a Material toggle button group. Income transactions are stored with `type = "INCOME"` and excluded from spending totals and goal calculations — only expenses count toward the budget. This allows users to get a complete picture of their cash flow rather than just tracking spending.
+When adding a transaction, users can switch between **Expense** and **Income** using a Material toggle button group (see screenshot below). Income transactions are stored with `type = "INCOME"` and excluded from spending totals and goal calculations — only expenses count toward the budget. This allows users to get a complete picture of their cash flow rather than just tracking spending.
 
 **Where to find it:** Tap the ➕ FAB on the Dashboard → toggle between "Expense" and "Income" at the top of the bottom sheet.
 
 ### Feature 2: Receipt Photo Attachment with Full-Screen Viewer
 Every transaction can have a photo receipt attached — either taken with the camera in real time or selected from the gallery. Photos are stored as file URIs on the device (using `FileProvider` for camera captures). In the Reports screen, any transaction with a photo shows a camera icon; tapping it opens a full-screen `TouchImageView` that supports pinch-to-zoom and pan gestures — ideal for reading receipt text on a small screen.
 
-**Where to find it:** Add Transaction → tap "Add Photo" → take or choose a photo. In Reports, tap the photo icon on any transaction.
+**Where to find it:** Add Transaction → tap "Add Photo Receipt" → take or choose a photo (see screenshot below). In Reports, tap the photo icon on any transaction.
 
 ---
 
 ## Screenshots
 
-> *(Add screenshots here after recording on a physical device)*
+All screenshots below were captured running on a physical Android device.
 
-| Splash | Login | Dashboard |
-|---|---|---|
-| ![splash](screenshots/splash.png) | ![login](screenshots/login.png) | ![dashboard](screenshots/dashboard.png) |
+### Dashboard
+The home screen shows the personalised greeting, this month's spending total, a budget goal progress bar with min/max labels, current XP level, and daily streak — all at a glance.
 
-| Add Transaction | Reports | Rewards |
-|---|---|---|
-| ![add](screenshots/add_transaction.png) | ![reports](screenshots/reports.png) | ![rewards](screenshots/rewards.png) |
+<img src="screenshots/dashboard.png" width="280" alt="Dashboard showing spending and goal tracking"/> <img src="screenshots/dashboard_goal_tracking.png" width="280" alt="Dashboard before any spending logged"/>
+
+*Left: dashboard after logging a transaction, showing "On track" status in green. Right: dashboard at R0,00 spent, showing the "Spending below minimum goal" warning in amber.*
+
+### Add Transaction
+Tapping the floating ➕ button opens a bottom sheet to log a new expense or income, including the custom Expense/Income toggle (own feature 1) and the Add Photo Receipt option (own feature 2).
+
+<img src="screenshots/add_transaction.png" width="280" alt="Add transaction bottom sheet"/> <img src="screenshots/add_photo_dialog.png" width="280" alt="Add photo receipt dialog"/>
+
+*Left: the Add Transaction form with the Expense/Income toggle visible at the top. Right: the photo picker dialog offering Take Photo or Choose from Gallery.*
+
+### Categories
+A 2-column grid of spending categories, each with its own emoji icon and colour, with edit and delete actions per card.
+
+<img src="screenshots/categories.png" width="280" alt="Categories grid screen"/>
+
+### Reports
+Filter transactions by date range, view the monthly goal progress banner, and see a colour-coded pie chart breaking down spending by category.
+
+<img src="screenshots/reports.png" width="280" alt="Reports screen with pie chart and goal banner"/>
+
+### Rewards (Gamification)
+The Rewards screen displays the user's current level and XP progress, daily streak, and all badges earned so far.
+
+<img src="screenshots/rewards.png" width="280" alt="Rewards screen showing level, streak and badges"/>
+
+### Settings
+Users can set their minimum and maximum monthly budget goals here, which power the goal indicators shown on the Dashboard and Reports screens, and securely log out.
+
+<img src="screenshots/settings.png" width="280" alt="Settings screen with budget goal inputs"/>
 
 ---
 
@@ -207,40 +233,47 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  test-and-build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: gradle
 
-      - name: Grant execute permission for gradlew
+      - name: Grant execute permission to Gradle wrapper
         run: chmod +x gradlew
 
       - name: Run unit tests
-        run: ./gradlew test
+        run: ./gradlew test --stacktrace
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: app/build/reports/tests/
 
       - name: Build debug APK
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleDebug --stacktrace
 
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v3
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
         with:
-          name: budgetmate-debug
+          name: BudgetMate-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
 ```
 
 Every successful build produces a downloadable debug APK attached to the workflow run. This ensures the app compiles correctly on a clean machine — not just on the developer's computer.
 
-> **References:**  
-> - [Automated Build Android App — GitHub Marketplace](https://github.com/marketplace/actions/automated-build-android-app-with-github-action)  
+> **References:**
+> - [Automated Build Android App — GitHub Marketplace](https://github.com/marketplace/actions/automated-build-android-app-with-github-action)
 > - [IMAD5112 GitHub Actions example](https://github.com/IMAD5112/Github-actions/blob/main/.github/workflows/build.yml)
 
 ---
@@ -251,9 +284,9 @@ Unit tests are located in `app/src/test/` and are run automatically by the CI pi
 
 ### What is tested
 
-- **`ExtensionsTest`** — verifies `isEndTimeAfterStart()` with valid, equal, and reversed times; verifies `toZar()` formatting; verifies `xpLevel()` returns the correct tier for boundary values.
-- **`TransactionRepositoryTest`** — uses an in-memory Room database to test that valid transactions are saved, that `InvalidAmount` is returned for zero/negative amounts, that `InvalidTime` is returned when end time is not after start time, and that deleting a transaction removes it from the database.
-- **`GamificationTest`** — verifies that XP is incremented after saving a transaction, and that the "First Step" badge is awarded after the first transaction.
+- **`ExtensionsTest`** — verifies `isEndTimeAfterStart()` with valid, equal, and reversed times; verifies `toZar()` formatting; verifies `xpLevel()` returns the correct tier for boundary values; verifies `sha256()` hashing and `toReadableDate()` parsing.
+- **`TransactionValidationTest`** — verifies that valid transactions pass validation, that invalid amounts (zero/negative) and invalid times are rejected, and that category/date validation behaves correctly.
+- **`GamificationTest`** — verifies XP-per-transaction calculation, badge XP bonuses, level progression through all six tiers, XP progress bar calculation, and goal-reward eligibility logic.
 
 Run tests locally with:
 
@@ -267,7 +300,8 @@ Run tests locally with:
 
 ### User Interface
 - The app uses **Material Design 3** components throughout: `MaterialCardView`, `MaterialButton`, `TextInputLayout`, `BottomSheetDialogFragment`, `MaterialAlertDialogBuilder`.
-- A custom teal colour palette (`#00C9A7`) was chosen to feel fresh and financial without being bank-corporate.
+- A custom teal-and-navy colour palette was chosen to feel fresh and financial without being bank-corporate (see screenshots above).
+- Every screen has a consistent navy header with a title and short subtitle, giving the app a cohesive visual identity.
 - The Bottom Sheet pattern for Add Transaction keeps the user on the Dashboard/Reports screen — no full-screen navigation break.
 - The category grid uses the user's own chosen hex colour as the card accent, making it visually personalised.
 
@@ -302,10 +336,10 @@ Run tests locally with:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/BudgetMate.git
+git clone https://github.com/DraxlerSosa/BudgetMateFixedCompleted.git
 
 # 2. Open in Android Studio
-File → Open → select the BudgetMate folder
+File → Open → select the project folder
 
 # 3. Let Gradle sync
 
@@ -313,13 +347,13 @@ File → Open → select the BudgetMate folder
 Run → Run 'app'
 ```
 
-The built APK is also available as an artifact from the latest GitHub Actions run under **Actions → Android CI → build → budgetmate-debug**.
+The built APK is also available as an artifact from the latest GitHub Actions run under **Actions → Android CI → (latest run) → BudgetMate-debug-apk**.
 
 ---
 
 ## Video Demonstration
 
-> 📹 **[Watch the demo on YouTube](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)**  
+> 📹 **[Watch the demo on YouTube](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)**
 > *(Replace this link with your unlisted YouTube URL before submission)*
 
 The video demonstrates:
